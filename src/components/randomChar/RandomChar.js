@@ -4,6 +4,8 @@ import useMarvelService from '../../services/MarvelService';
 import Spinner from '../spinner/spinner';
 import ErrorMessage from '../error/Error';
 
+import { motion } from 'framer-motion/dist/framer-motion';
+
 import './randomChar.scss';
 import mjolnir from '../../resources/img/mjolnir.png';
 
@@ -60,7 +62,7 @@ const View = ({char}) => {
     const { name, thumbnail, description, homepage, wiki } = char;
 
     return (
-        <div className="randomchar__block">
+        <motion.div initial={{opacity: 0, transition: {duration: 1}}} animate={{opacity: 1, transition: {duration: 1}}} exit={{x: '200%', transition: {duration: 3}}} className="randomchar__block">
             <img src={thumbnail} alt="Random character" className="randomchar__img" />
             <div className="randomchar__info">
                 <p className="randomchar__name">{name}</p>
@@ -76,7 +78,7 @@ const View = ({char}) => {
                     </a>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 

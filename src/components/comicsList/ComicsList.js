@@ -5,6 +5,8 @@ import useMarvelService from '../../services/MarvelService';
 import Spinner from '../spinner/spinner';
 import ErrorMessage from '../error/Error';
 
+import { motion } from 'framer-motion/dist/framer-motion';
+
 import './comicsList.scss';
 
 const ComicsList = () => {
@@ -45,13 +47,14 @@ const ComicsList = () => {
                 style = {'objectFit':'unset'}
             }
             return (
-                <li key={i} className="comics__item">
+                <motion.li initial={{opacity: 0, transition: {duration: 1}}} animate={{opacity: 1, transition: {duration: 1}}} exit={{x: '200%', transition: {duration: 3}}}
+                    key={i} className="comics__item">
                     <Link to={`/comics/${item.id}`}>
                         <img src={item.thumbnail} alt={item.name} className="comics__item-img" style={style}/>
                         <div className="comics__item-name">{item.name}</div>
                         <div className="comics__item-price">{item.price}</div>
                     </Link>
-                </li>
+                </motion.li>
             )
         })
         return (

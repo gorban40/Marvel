@@ -6,6 +6,8 @@ import CharInfo from "../charInfo/CharInfo";
 import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 import decoration from '../../resources/img/vision.png';
 
+import { motion } from 'framer-motion/dist/framer-motion';
+
 const MainPage = () => {
 
     const [selectedChar, setChar] = useState(null);
@@ -15,7 +17,7 @@ const MainPage = () => {
     }
 
     return (
-        <>
+        <motion.div initial={{x: '-200%'}} animate={{x: 0, transition: {duration: 1}}} exit={{x: '200%', transition: {duration: 1}}}>
             <ErrorBoundary>
                 <RandomChar />
             </ErrorBoundary>
@@ -28,7 +30,7 @@ const MainPage = () => {
                 </ErrorBoundary>
             </div>
             <img className="bg-decoration" src={decoration} alt="vision" />
-        </>
+        </motion.div>
     )
 }
 

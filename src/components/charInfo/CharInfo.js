@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { motion } from 'framer-motion/dist/framer-motion';
 
 import useMarvelService from '../../services/MarvelService';
 import ErrorMessage from '../error/Error';
@@ -11,6 +12,9 @@ import './charInfo.scss';
 
 const CharInfo = (props) => {
 
+
+
+// Transition
     const [char, setChar] = useState(null);
 
 
@@ -24,8 +28,8 @@ const CharInfo = (props) => {
         if (!props.charId) {
             return;
         }
-        
         clearError();
+
 
         getCharacter(props.charId)
             .then(onCharLoaded)
@@ -60,7 +64,7 @@ const View = ({ char }) => {
 
 
     return (
-        <>
+        <motion.div initial={{opacity: 0, transition: {duration: 1}}} animate={{opacity: 1, transition: {duration: 1}}} exit={{opacity: 0, transition: {duration: 3}}}>
             <div className="char__basics">
                 <img src={thumbnail} alt={name} style={styleImg} />
                 <div>
@@ -93,7 +97,7 @@ const View = ({ char }) => {
                     })
                 }
             </ul>
-        </>
+        </motion.div>
     )
 }
 

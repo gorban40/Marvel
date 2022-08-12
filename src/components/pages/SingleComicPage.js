@@ -6,6 +6,8 @@ import useMarvelService from '../../services/MarvelService';
 import ErrorMessage from '../error/Error';
 import Spinner from '../spinner/spinner';
 
+import { motion } from 'framer-motion/dist/framer-motion';
+
 import './singleComicPage.scss';
 
 const SingleComicPage = () => {
@@ -31,12 +33,12 @@ const SingleComicPage = () => {
     const content = !(error || loading || !comic) ? <View comic={comic} /> : null;
 
     return (
-        <>
+        <motion.div initial={{x: '-200%'}} animate={{x: 0, transition: {duration: 1}}} exit={{x: '200%', transition: {duration: 1}}}>
             <AppBanner/>
             {errorMessage}
             {loadingMessage}
             {content}
-        </>
+        </motion.div>
     )
 }
 
