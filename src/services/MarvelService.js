@@ -10,7 +10,6 @@ const useMarvelService = () => {
     const _baseOffset = 210;
 
 
-
     const getAllCharacters = async (offset = _baseOffset) => {
         const res = await request(`${_apiBase}characters?limit=9&offset=${offset}}&${_apiKey}`);
         return res.data.results.map(_transformCharacter);
@@ -27,6 +26,10 @@ const useMarvelService = () => {
         const res = await request(`${_apiBase}comics/${id}?${_apiKey}`)
         return _transformComics(res.data.results[0])
     }
+    const getCharacterByName = async (name) => {
+        const res = await request(`${_apiBase}characters?name=${name}&${_apiKey}`);
+        return res.data.results.map(_transformCharacterByName);
+    }
 
 
     const _transformComics = (comics) => {
@@ -37,8 +40,7 @@ const useMarvelService = () => {
             thumbnail: comics.thumbnail.path + '.' + comics.thumbnail.extension,
             description: comics.description || 'There is no description',
             pageCount: comics.pageCount ? `${comics.pageCount} p.` : 'No information about the number of pages',
-            language: comics.textObjects.language || 'en-us',
-
+            language: comics.textObjects.language || 'en-us'
         }
     }
     const _transformCharacter = (char) => {
@@ -50,8 +52,6 @@ const useMarvelService = () => {
         } else {
             descr = char.description;
         }
-
-        
         return {
             id: char.id,
             name: char.name,
@@ -60,11 +60,24 @@ const useMarvelService = () => {
             homepage: char.urls[0].url,
             wiki: char.urls[1].url,
             comics: char.comics.items,
-            
+        }
+    }
+    const _transformCharacterByName = (char) => {
+        let descr = '';
+        if (char.description === '') {
+            descr = 'Данные про этого персонажа ещё не проработаны';
+        } else {
+            descr = char.description
+        }
+        return {
+            id: char.id,
+            name: char.name,
+            description: descr,
+            thumbnail: char.thumbnail.path + '.' + char.thumbnail.extension,
         }
     }
 
-    return {loading, error, getAllCharacters, getCharacter, clearError, getAllComics, getComic}
+    return {loading, error, getAllCharacters, getCharacter, clearError, getAllComics, getComic, getCharacterByName}
 }
 
 

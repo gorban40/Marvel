@@ -12,7 +12,7 @@ import './comicsList.scss';
 const ComicsList = () => {
 
     const [comicsList, setComicsList ] = useState([]);
-    const [offset, setOffset] = useState(99);
+    const [offset, setOffset] = useState(210);
     const [newItemLoading, setNewItemLoading] = useState(false);
     const [comicsEnd, setComicsEnd] = useState(false)
 
