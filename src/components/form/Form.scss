@@ -1,0 +1,49 @@
+.form {
+    margin-top: 30px;
+    width: 425px;
+    min-height: 127px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+    padding: 25px;
+    position: relative;
+    label {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 21px;
+        color: #000000;
+    }
+    input {
+        margin-top: 15px;
+        width: 250px;
+        height: 38px;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border: none;
+        padding: 10px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        color: rgba(0, 0, 0, 0.5);
+    }
+    &__btn {
+        position: absolute;
+        top: 60px;
+        right: 25px;
+        &_topage {
+            bottom: -25px;
+        }
+    }
+    &__message {
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 21px;
+        margin-top: 22px;
+        &_true {
+            color: #03710E;
+        }
+        &_false {
+            color: #9F0013;
+        }
+    }
+}
