@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 import RandomChar from "../randomChar/RandomChar";
 import CharList from "../charList/CharList";
@@ -18,23 +19,30 @@ const MainPage = () => {
     }
 
     return (
-        <motion.div initial={{x: '-200%'}} animate={{x: 0, transition: {duration: 1}}} exit={{x: '200%', transition: {duration: 1}}}>
-            <ErrorBoundary>
-                <RandomChar />
-            </ErrorBoundary>
-            <div className="char__content">
+            <motion.div initial={{ x: '-200%' }} animate={{ x: 0, transition: { duration: 1 } }} exit={{ x: '200%', transition: { duration: 1 } }}>
+                <Helmet>
+                <meta
+                    name="description"
+                    content="Marvel information portal"
+                    />
+                <title>Marvel information portal</title>
+                </Helmet>
                 <ErrorBoundary>
-                    <CharList onCharSelector={onCharSelector} />
+                    <RandomChar />
                 </ErrorBoundary>
-                <ErrorBoundary>
-                    <div>
-                        <CharInfo charId={selectedChar} />
-                        <CustomForm/>
-                    </div>
-                </ErrorBoundary>
-            </div>
-            <img className="bg-decoration" src={decoration} alt="vision" />
-        </motion.div>
+                <div className="char__content">
+                    <ErrorBoundary>
+                        <CharList onCharSelector={onCharSelector} />
+                    </ErrorBoundary>
+                    <ErrorBoundary>
+                        <div>
+                            <CharInfo charId={selectedChar} />
+                            <CustomForm />
+                        </div>
+                    </ErrorBoundary>
+                </div>
+                <img className="bg-decoration" src={decoration} alt="vision" />
+            </motion.div>
     )
 }
 

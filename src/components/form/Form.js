@@ -67,7 +67,7 @@ const CustomForm = () => {
                 </button>
                 {
                     charExist ? 
-                    <Link to={`/${char[0].name}`}>
+                    <Link to={`/${char[0].id}`}>
                         <button type="submit" className="button button__secondary form__btn form__btn_topage">
                             <div className="inner">TO PAGE</div>
                         </button>
