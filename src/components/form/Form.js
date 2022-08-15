@@ -7,8 +7,6 @@ import useMarvelService from "../../services/MarvelService";
 
 import './Form.scss'
 
-
-
 const CustomForm = () => {
 
     const { getCharacterByName, clearError } = useMarvelService();
@@ -23,7 +21,6 @@ const CustomForm = () => {
         getCharacterByName(name)
             .then(charLoaded)
             .then(checkChar)
-        console.log(char);
     }
     const checkChar = () => {
         if (char.length > 0) {

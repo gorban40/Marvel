@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import useMarvelService from '../../services/MarvelService';
-import Spinner from '../spinner/spinner';
-import ErrorMessage from '../error/Error';
+import setContent from '../../utils/setContent';
 
 import { motion } from 'framer-motion/dist/framer-motion';
 
@@ -13,7 +12,7 @@ const RandomChar = () => {
 
     const [char, setChar] = useState({});
 
-    const {loading, error, getCharacter, clearError} = useMarvelService();
+    const {getCharacter, clearError, setProcess, process} = useMarvelService();
 
 
     useEffect(() => {
@@ -27,19 +26,13 @@ const RandomChar = () => {
         clearError();
         const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
             getCharacter(id)
-            .then(onCharLoaded);
+            .then(onCharLoaded)
+            .then(() => setProcess('confirmed'))
     }
-
-
-    const errorMessage = error ? <ErrorMessage /> : null;
-    const spinner = loading ? <Spinner /> : null;
-    const content = !(loading || error) ? <View char={char} /> : null;
 
     return (
         <div className="randomchar">
-            {errorMessage}
-            {spinner}
-            {content}
+            {setContent(process,View, char)}
             <div className="randomchar__static">
                 <p className="randomchar__title">
                     Random character for today!<br />
@@ -57,9 +50,9 @@ const RandomChar = () => {
     )
 }
 
-const View = ({char}) => {
+const View = ({data}) => {
 
-    const { name, thumbnail, description, homepage, wiki } = char;
+    const { name, thumbnail, description, homepage, wiki } = data;
 
     return (
         <motion.div initial={{opacity: 0, transition: {duration: 1}}} animate={{opacity: 1, transition: {duration: 1}}} exit={{x: '200%', transition: {duration: 3}}} className="randomchar__block">
