@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion/dist/framer-motion';
 
@@ -92,10 +92,14 @@ const CharList = (props) => {
         )
     }
 
+    const elements = useMemo(() => {
+        return setContent(process, () => makeList(charList), newItemLoading)
+    }, [process])
+
     return (
         <div className="char__list">
 
-            {setContent(process, () => makeList(charList), newItemLoading)}
+            {elements}
 
             <button onClick={() => onRequest(offset)}
                 className="button button__main button__long"
@@ -106,6 +110,7 @@ const CharList = (props) => {
         </div>
     )
 }
+
 
 CharList.propTypes = {
     onCharSelector: PropTypes.func.isRequired

@@ -11,7 +11,7 @@ const CustomForm = () => {
 
     const { getCharacterByName, clearError } = useMarvelService();
 
-    const [char, setChar] = useState([]);
+    const [char, setChar] = useState(null);
     const [charExist, setCharExist] = useState(false);
     const [charNotFound, setCharNotFound] = useState(false);
 
@@ -19,20 +19,17 @@ const CustomForm = () => {
         clearError()
 
         getCharacterByName(name)
-            .then(charLoaded)
             .then(checkChar)
     }
-    const checkChar = () => {
-        if (char.length > 0) {
+    const checkChar = (charSet) => {
+        if (charSet.length > 0) {
+            setChar(charSet);
             setCharNotFound(false);
             setCharExist(true);
         } else {
             setCharExist(false);
             setCharNotFound(true);
         }
-    }
-    const charLoaded = (charSet) => {
-        setChar(charSet);
     }
 
     return (

@@ -29,7 +29,7 @@ const RandomChar = () => {
             .then(onCharLoaded)
             .then(() => setProcess('confirmed'))
     }
-
+    
     return (
         <div className="randomchar">
             {setContent(process,View, char)}
